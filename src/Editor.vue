@@ -47,6 +47,15 @@ export default defineComponent({
         state.editor = null
       }
     }
+    
+    function save() {
+      if (!state.editor) {
+        return
+      }
+      state.editor.save()
+        .then((result) => context.emit('save', result))
+        .catch((err) => console.error(err))
+    }
 
     onMounted(_ => initEditor(props))
 
